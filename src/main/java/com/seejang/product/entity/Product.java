@@ -1,8 +1,6 @@
 package com.seejang.product.entity;
 
 import com.seejang.common.AggregateRoot;
-import com.seejang.inventory.entity.Inventory;
-import com.seejang.product.entity.ProductId.ProductIdType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,19 +11,17 @@ import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.JavaType;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Product extends AggregateRoot<Product, ProductId> {
+public class Product extends AggregateRoot<Product, Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JavaType(ProductIdType.class)
-    private ProductId id;
+    private Long id;
 
     private String name;
 
@@ -35,8 +31,7 @@ public class Product extends AggregateRoot<Product, ProductId> {
     @Embedded
     private Price regularPrice;
 
-    @Embedded
-    private Price shippingFee;
+    private Long shippingFee;
 
     @Embedded
     private Inventory inventory;

@@ -8,17 +8,15 @@ import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.JavaType;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProductDetail extends DomainEntity<ProductDetail, ProductDetailId> {
+public class ProductDetail extends DomainEntity<ProductDetail, Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JavaType(ProductDetailId.ProductDetailIdType.class)
-    private ProductDetailId id;
+    private Long id;
 
     private String content;
 }

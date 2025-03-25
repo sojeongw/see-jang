@@ -7,7 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 @Getter
 @MappedSuperclass
@@ -15,8 +15,8 @@ import java.time.ZonedDateTime;
 public class AuditableEntity {
 
     @CreationTimestamp
-    private ZonedDateTime createdAt;
+    private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    private ZonedDateTime updatedAt;
+    private LocalDateTime updatedAt;
 }

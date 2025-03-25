@@ -1,5 +1,6 @@
 package com.seejang.common;
 
+import jakarta.persistence.MappedSuperclass;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.AfterDomainEventPublication;
 import org.springframework.data.domain.DomainEvents;
@@ -10,6 +11,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+@MappedSuperclass
 public abstract class AggregateRoot<T extends DomainEntity<T, TID>, TID> extends DomainEntity<T, TID> {
     @Transient
     private final transient List<Object> domainEvents = new ArrayList();

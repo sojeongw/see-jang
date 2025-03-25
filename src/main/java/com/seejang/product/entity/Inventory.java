@@ -1,4 +1,4 @@
-package com.seejang.inventory.entity;
+package com.seejang.product.entity;
 
 import com.seejang.common.ValueObject;
 import jakarta.persistence.Embeddable;

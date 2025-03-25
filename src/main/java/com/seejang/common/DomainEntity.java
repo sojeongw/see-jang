@@ -1,5 +1,8 @@
 package com.seejang.common;
 
+import jakarta.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class DomainEntity<T extends DomainEntity<T, TID>, TID> extends AuditableEntity {
     @Override
     public boolean equals(Object other) {
