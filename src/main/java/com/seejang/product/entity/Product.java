@@ -1,9 +1,12 @@
 package com.seejang.product.entity;
 
 import com.seejang.common.AggregateRoot;
+import com.seejang.inventory.entity.Inventory;
 import com.seejang.product.entity.ProductId.ProductIdType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,6 +29,7 @@ public class Product extends AggregateRoot<Product, ProductId> {
 
     private String name;
 
+    @Enumerated(EnumType.STRING)
     private Category category;
 
     @Embedded
@@ -33,6 +37,9 @@ public class Product extends AggregateRoot<Product, ProductId> {
 
     @Embedded
     private Price shippingFee;
+
+    @Embedded
+    private Inventory inventory;
 
     private LocalDateTime deadline;
 }
