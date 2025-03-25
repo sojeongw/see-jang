@@ -1,6 +1,9 @@
 package com.seejang.product.entity;
 
 import com.seejang.common.AggregateRoot;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -29,9 +32,12 @@ public class Product extends AggregateRoot<Product, Long> {
     private Category category;
 
     @Embedded
+    @AttributeOverrides({@AttributeOverride(name = "amount", column = @Column(name = "regular_price")),})
     private Price regularPrice;
 
-    private Long shippingFee;
+    @Embedded
+    @AttributeOverrides({@AttributeOverride(name = "amount", column = @Column(name = "shipping_fee")),})
+    private Price shippingFee;
 
     @Embedded
     private Inventory inventory;
