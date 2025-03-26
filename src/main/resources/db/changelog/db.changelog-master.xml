@@ -1,25 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <changeSet id="1" author="seejang">
-        <createTable tableName="product">
-            <column name="id" type="bigint">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="name" type="varchar(100)"/>
-            <column name="category" type="varchar(20)"/>
-            <column name="description" type="text"/>
-            <column name="regular_price" type="decimal"/>
-            <column name="shipping_fee" type="decimal"/>
-            <column name="quantity" type="bigint"/>
-            <column name="status" type="varchar(20)"/>
-            <column name="deadline" type="timestamp"/>
-            <column name="created_at" type="timestamp"/>
-            <column name="updated_at" type="timestamp"/>
-        </createTable>
+        <sql>
+            CREATE TABLE product
+            (
+                id            BIGINT AUTO_INCREMENT PRIMARY KEY,
+                name          VARCHAR(100),
+                category      VARCHAR(20),
+                description   TEXT,
+                regular_price DECIMAL,
+                shipping_fee  DECIMAL,
+                quantity      BIGINT,
+                status        VARCHAR(20),
+                deadline      TIMESTAMP,
+                created_at    TIMESTAMP,
+                updated_at    TIMESTAMP
+            );
+        </sql>
     </changeSet>
 
 </databaseChangeLog>
