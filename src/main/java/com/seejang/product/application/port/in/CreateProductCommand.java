@@ -19,6 +19,9 @@ public class CreateProductCommand extends SelfValidator<CreateProductCommand> {
     private final Category category;
 
     @NotNull
+    private final String description;
+
+    @NotNull
     private final BigDecimal regularPrice;
 
     @NotNull
@@ -32,9 +35,10 @@ public class CreateProductCommand extends SelfValidator<CreateProductCommand> {
 
     private final LocalDateTime deadline;
 
-    public CreateProductCommand(String name, Category category, BigDecimal regularPrice, BigDecimal shippingFee, Long quantity, Status status, LocalDateTime deadline) {
+    public CreateProductCommand(String name, Category category, String description, BigDecimal regularPrice, BigDecimal shippingFee, Long quantity, Status status, LocalDateTime deadline) {
         this.name = name;
         this.category = category;
+        this.description = description;
         this.regularPrice = regularPrice;
         this.shippingFee = shippingFee;
         this.quantity = quantity;

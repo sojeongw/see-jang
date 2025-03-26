@@ -32,6 +32,8 @@ public class Product extends AggregateRoot<Product, Long> {
     @Enumerated(EnumType.STRING)
     private Category category;
 
+    private String description;
+
     @Embedded
     @AttributeOverrides({@AttributeOverride(name = "amount", column = @Column(name = "regular_price"))})
     private Price regularPrice;
@@ -45,16 +47,19 @@ public class Product extends AggregateRoot<Product, Long> {
 
     private LocalDateTime deadline;
 
-    private Product(String name, Category category, Price regularPrice, Price shippingFee, Inventory inventory, LocalDateTime deadline) {
+    private Product(String name, Category category, String description, Price regularPrice, Price shippingFee,
+                    Inventory inventory, LocalDateTime deadline) {
         this.name = name;
         this.category = category;
+        this.description = description;
         this.regularPrice = regularPrice;
         this.shippingFee = shippingFee;
         this.inventory = inventory;
         this.deadline = deadline;
     }
 
-    public static Product of(String name, Category category, BigDecimal regularPrice, BigDecimal shippingFee, Long quantity, Status status, LocalDateTime deadline) {
+    public static Product of(String name, Category category, String description, BigDecimal regularPrice, BigDecimal shippingFee,
+                             Long quantity, Status status, LocalDateTime deadline) {
         if (quantity == null || quantity < 0) {
             throw new IllegalArgumentException("수량이 적절하지 않습니다.");
         }
@@ -64,7 +69,7 @@ public class Product extends AggregateRoot<Product, Long> {
         if (shippingFee == null || shippingFee.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("배송비가 적절하지 않습니다");
         }
-        return new Product(name, category, new Price(regularPrice), new Price(shippingFee), new Inventory(quantity, status), deadline);
+        return new Product(name, category, description, new Price(regularPrice), new Price(shippingFee), new Inventory(quantity, status), deadline);
     }
 
 

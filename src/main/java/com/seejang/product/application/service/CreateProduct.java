@@ -16,8 +16,8 @@ public class CreateProduct {
 
     @Transactional
     public CreateProductResult execute(CreateProductCommand command) {
-        Product product = Product.of(command.getName(), command.getCategory(), command.getRegularPrice(), command.getShippingFee(),
-                command.getQuantity(), command.getStatus(), command.getDeadline());
+        Product product = Product.of(command.getName(), command.getCategory(), command.getDescription(),
+                command.getRegularPrice(), command.getShippingFee(), command.getQuantity(), command.getStatus(), command.getDeadline());
 
         productRepository.save(product);
 
@@ -25,6 +25,7 @@ public class CreateProduct {
                 product.getId(),
                 product.getName(),
                 product.getCategory(),
+                product.getDescription(),
                 product.getRegularPrice().getAmount(),
                 product.getShippingFee().getAmount(),
                 product.getInventory().getQuantity(),

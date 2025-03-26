@@ -22,8 +22,8 @@ class ProductTest {
     @DisplayName("상품을 생성할 수 있다")
     void create() {
         String name = "삼다수 500ml";
-        Product result = Product.of(name, Category.NORMAL, BigDecimal.valueOf(1000), BigDecimal.valueOf(2500),
-                100L, Status.AVAILABLE, null);
+        Product result = Product.of(name, Category.NORMAL, "멋쟁이 삼다수", BigDecimal.valueOf(1000),
+                BigDecimal.valueOf(2500), 100L, Status.AVAILABLE, null);
 
         assertThat(result).isNotNull();
         assertThat(result.getName()).isEqualTo(name);
@@ -32,8 +32,8 @@ class ProductTest {
     @Test
     @DisplayName("수량이 마이너스면 상품을 생성할 수 없다")
     void quantity_illegal_exception() {
-        assertThatThrownBy(() -> Product.of("삼다수 500ml", Category.NORMAL, BigDecimal.valueOf(1000),
-                BigDecimal.valueOf(2500), -1L, Status.AVAILABLE, null))
+        assertThatThrownBy(() -> Product.of("삼다수 500ml", Category.NORMAL, "멋쟁이 삼다수",
+                BigDecimal.valueOf(1000), BigDecimal.valueOf(2500), -1L, Status.AVAILABLE, null))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -41,7 +41,7 @@ class ProductTest {
     @MethodSource("provideInvalidPrices")
     @DisplayName("가격이 없거나 마이너스면 상품을 생성할 수 없다")
     void regular_price_illegal_exception(BigDecimal price) {
-        assertThatThrownBy(() -> Product.of("삼다수 500ml", Category.NORMAL, price,
+        assertThatThrownBy(() -> Product.of("삼다수 500ml", Category.NORMAL, "멋쟁이 삼다수", price,
                 BigDecimal.valueOf(2500), 100L, Status.AVAILABLE, null))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -50,8 +50,8 @@ class ProductTest {
     @MethodSource("provideInvalidPrices")
     @DisplayName("배송비가 없거나 마이너스면 상품을 생성할 수 없다")
     void shipping_fee_illegal_exception(BigDecimal fee) {
-        assertThatThrownBy(() -> Product.of("삼다수 500ml", Category.NORMAL, BigDecimal.valueOf(1000),
-                fee, 100L, Status.AVAILABLE, null))
+        assertThatThrownBy(() -> Product.of("삼다수 500ml", Category.NORMAL, "멋쟁이 삼다수",
+                BigDecimal.valueOf(1000), fee, 100L, Status.AVAILABLE, null))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

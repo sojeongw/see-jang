@@ -10,6 +10,7 @@ public record CreateProductResult(
         Long id,
         String name,
         Category category,
+        String description,
         BigDecimal regularPrice,
         BigDecimal shippingFee,
         Long quantity,
