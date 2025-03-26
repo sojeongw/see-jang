@@ -6,19 +6,19 @@
 
     <changeSet id="1" author="seejang">
         <createTable tableName="product">
-            <column name="id" type="int">
+            <column name="id" type="bigint">
                 <constraints primaryKey="true"/>
             </column>
             <column name="name" type="varchar(100)"/>
             <column name="category" type="varchar(20)"/>
             <column name="description" type="text"/>
-            <column name="regular_price" type="int"/>
-            <column name="shipping_fee" type="int"/>
-            <column name="quantity" type="int"/>
+            <column name="regular_price" type="decimal"/>
+            <column name="shipping_fee" type="decimal"/>
+            <column name="quantity" type="bigint"/>
             <column name="status" type="varchar(20)"/>
-            <column name="deadline" type="date"/>
-            <column name="created_at" type="date"/>
-            <column name="updated_at" type="date"/>
+            <column name="deadline" type="timestamp"/>
+            <column name="created_at" type="timestamp"/>
+            <column name="updated_at" type="timestamp"/>
         </createTable>
     </changeSet>
 
