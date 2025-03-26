@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: seejang-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: seejang
+      MYSQL_USER: user
+      MYSQL_PASSWORD: passwd
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - my-network
+
+  app:
+    build: .
+    container_name: seejang
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    networks:
+      - my-network
+
+volumes:
+  mysql_data:
+
+networks:
+  my-network:
