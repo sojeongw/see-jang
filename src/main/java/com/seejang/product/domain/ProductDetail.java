@@ -1,4 +1,4 @@
-package com.seejang.product.entity;
+package com.seejang.product.domain;
 
 import com.seejang.common.DomainEntity;
 import jakarta.persistence.Entity;
