@@ -34,7 +34,7 @@ class CreateProductTest {
 
     @Mock
     private CreateProductCommand command;
-    
+
     @Nested
     @DisplayName("수량이")
     class Quantity {

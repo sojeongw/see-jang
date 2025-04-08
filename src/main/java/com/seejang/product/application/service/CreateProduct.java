@@ -20,7 +20,6 @@ public class CreateProduct {
                 command.getRegularPrice(), command.getShippingFee(), command.getQuantity(), command.getStatus(), command.getDeadline());
 
         productRepository.save(product);
-
         return new CreateProductResult(
                 product.getId(),
                 product.getName(),
