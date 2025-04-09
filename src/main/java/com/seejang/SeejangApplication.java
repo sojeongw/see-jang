@@ -1,6 +1,6 @@
 package com.seejang;
 
-import com.seejang.product.adaptor.out.persistence.ProductSearchRepository;
+import com.seejang.product.adaptor.out.persistence.ProductDocumentRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableJpaRepositories(excludeFilters = @ComponentScan.Filter(
         type = FilterType.ASSIGNABLE_TYPE,
-        classes = ProductSearchRepository.class))
+        classes = ProductDocumentRepository.class))
 @SpringBootApplication
 public class SeejangApplication {
 

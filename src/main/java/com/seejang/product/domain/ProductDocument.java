@@ -15,13 +15,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
 @Document(indexName = "products")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProductSearch extends AggregateRoot<ProductSearch, Long> {
+public class ProductDocument extends AggregateRoot<ProductDocument, Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,8 +46,8 @@ public class ProductSearch extends AggregateRoot<ProductSearch, Long> {
 
     private LocalDateTime deadline;
 
-    private ProductSearch(String name, Category category, String description, Price regularPrice, Price shippingFee,
-                          Inventory inventory, LocalDateTime deadline) {
+    private ProductDocument(String name, Category category, String description, Price regularPrice,
+                            Price shippingFee, Inventory inventory, LocalDateTime deadline) {
         this.name = name;
         this.category = category;
         this.description = description;
@@ -58,17 +57,17 @@ public class ProductSearch extends AggregateRoot<ProductSearch, Long> {
         this.deadline = deadline;
     }
 
-    public static ProductSearch of(String name, Category category, String description, BigDecimal regularPrice, BigDecimal shippingFee,
-                                   Long quantity, Status status, LocalDateTime deadline) {
-        if (quantity == null || quantity < 0) {
-            throw new IllegalArgumentException("수량이 적절하지 않습니다.");
+    public static ProductDocument of(String name, Category category, String description, Price regularPrice,
+                                     Price shippingFee, Inventory inventory, LocalDateTime deadline) {
+        if (inventory.invalid()) {
+            throw new IllegalArgumentException("수량이 적절하지 않습니다");
         }
-        if (regularPrice == null || regularPrice.compareTo(BigDecimal.ZERO) < 0) {
+        if (regularPrice.invalid()) {
             throw new IllegalArgumentException("가격이 적절하지 않습니다");
         }
-        if (shippingFee == null || shippingFee.compareTo(BigDecimal.ZERO) < 0) {
+        if (shippingFee.invalid()) {
             throw new IllegalArgumentException("배송비가 적절하지 않습니다");
         }
-        return new ProductSearch(name, category, description, new Price(regularPrice), new Price(shippingFee), new Inventory(quantity, status), deadline);
+        return new ProductDocument(name, category, description, regularPrice, shippingFee, inventory, deadline);
     }
 }

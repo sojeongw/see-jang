@@ -1,9 +1,9 @@
 package com.seejang.product.application.service;
 
-import com.seejang.product.adaptor.out.persistence.ProductSearchRepository;
+import com.seejang.product.adaptor.out.persistence.ProductDocumentRepository;
 import com.seejang.product.application.port.in.SearchProductListQuery;
 import com.seejang.product.application.port.out.SearchProductListResult;
-import com.seejang.product.domain.ProductSearch;
+import com.seejang.product.domain.ProductDocument;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,11 +14,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SearchProductList {
 
-    private final ProductSearchRepository productSearchRepository;
+    private final ProductDocumentRepository productSearchRepository;
 
     @Transactional(readOnly = true)
     public SearchProductListResult execute(SearchProductListQuery query) {
-        List<ProductSearch> products = productSearchRepository.findByName(query.getName());
+        List<ProductDocument> products = productSearchRepository.findByName(query.getName());
 
         return new SearchProductListResult(
                 products.stream()
