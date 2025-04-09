@@ -2,6 +2,7 @@ package com.seejang.product.application.service;
 
 import com.seejang.product.adaptor.out.persistence.ProductRepository;
 import com.seejang.product.application.port.in.CreateProductCommand;
+import com.seejang.product.application.port.in.CreateProductDocumentEvent;
 import com.seejang.product.application.port.out.CreateProductResult;
 import com.seejang.product.domain.Product;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.math.BigDecimal;
 
@@ -34,6 +36,9 @@ class CreateProductTest {
 
     @Mock
     private CreateProductCommand command;
+
+    @Mock
+    private ApplicationEventPublisher eventPublisher;
 
     @Nested
     @DisplayName("수량이")
@@ -85,6 +90,7 @@ class CreateProductTest {
                     CreateProductResult result = createProduct.execute(command);
 
                     verify(productRepository, times(1)).save(any(Product.class));
+                    verify(eventPublisher, times(1)).publishEvent(any(CreateProductDocumentEvent.class));
                     assertThat(result.regularPrice()).isEqualTo(command.getRegularPrice());
                     assertThat(result.shippingFee()).isEqualTo(command.getShippingFee());
                 }

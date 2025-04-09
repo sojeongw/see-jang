@@ -18,4 +18,8 @@ public class Price extends ValueObject<Price> {
     public Price(BigDecimal amount) {
         this.amount = amount;
     }
+
+    public boolean invalid() {
+        return this.amount == null || this.amount.compareTo(BigDecimal.ZERO) < 0;
+    }
 }

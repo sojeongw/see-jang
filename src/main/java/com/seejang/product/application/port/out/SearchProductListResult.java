@@ -12,7 +12,7 @@ public record SearchProductListResult(
 ) {
 
     public record ProductResult(
-            Long id,
+            String id,
             String name,
             Category category,
             String description,
